@@ -1,0 +1,69 @@
+GENERAL INFORMATION
+-------------------
+
+Item catalog website with full CRUD capability and JSON endpoint API
+
+scripts included:
+
+project.py - Backend of website   
+database_setup.py - Sets up ORM for tables in database 
+lotsofitems.py - populates database
+
+Folders Included:
+
+templates - templates of html pages
+static - Contains CSS styles 
+
+Prerequisites
+-------------
+
+Python == 2.7.6
+Flask == 0.9
+SQLAlchemy == 0.8.4
+httplib2 == 0.9.1
+google_api_python_client == 1.4.1
+oauth2client == 1.4.12
+
+Instalation
+-----------
+
+Download 'catalog.zip' and unzip. Afterwards setup the vm by:
+
+User@Terminal: vagrant up
+User@Terminal: vagrant ssh
+
+in the directory of the vagrant file.
+
+files are found by cd /vagrant/catalog in VM.
+
+Set UP
+------
+
+Set up and populate the database by the following commands:
+
+User@Terminal:~/$python database_setup.py
+User@Terminal:~/$python lotsofitems.py
+
+How to Run
+----------
+
+To start the local server for the website do the following:
+User@Terminal:~/$python project.py
+
+Afterwards open a Web browser and follow the address:
+
+localhost:5000/
+
+Usage
+-----
+
+The website can keep track of a catelog items allowing for creation of categories
+by the "Add Category" button. Also allows for deleting and editing of categories
+once selected by the buttons "Delete Category" and "Edit Category". Similary
+items in each catergory can all be added, deleted, and edited.
+
+CONTACT
+.......
+
+E-mail: saenam@uci.edu
+

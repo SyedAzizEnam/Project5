@@ -1,0 +1,60 @@
+	<div class="row top-item">
+		<div class="col-md-6">
+			<a href="{{url_for('showCategory')}}">
+				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All Categories
+			</a>
+		</div>
+	{% if 'username' not in session %}
+		<div class="col-md-4"></div>
+		<div class="col-md-2">
+			<p><strong>Log in </strong></p>
+		</div>
+		<div class="col-md-10"></div>
+		<div id="signInButton">
+          <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="367310198105-msefq431gcbevj8n6idv1lp5nrdj7pi7.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+          </span>
+        </div>
+    {% else %}
+		<div class="col-md-6 text-right">
+			<a href="{{url_for('gdisconnect')}}">Logout</a>
+		</div>
+    {% endif %}
+	<div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right"></div>
+	</div>
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+         setTimeout(function() {
+          window.location.href = "/categories/";
+         }, 10);
+          
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+      
+  }); } }
+</script>

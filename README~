@@ -1,0 +1,32 @@
+Item Catalog Website Version 1.0
+
+GENERAL INFORMATION
+-------------------
+
+scripts included:
+
+project.py - Backend of website   
+database_setup.py - Sets up ORM for tables in database 
+lotsofitems.py - populates database
+
+Example run
+-----------
+
+First a database must be made and setup by the following commands:
+
+User@Terminal:~/$python database_setup.py
+User@Terminal:~/$python lotsofitems.py
+
+To start the local server for the website do the following:
+User@Terminal:~/$python project.py
+
+Afterwards open a Web browser and follow the address:
+
+localhost:5000/
+
+
+CONTACT
+.......
+
+E-mail: saenam@uci.edu
+
