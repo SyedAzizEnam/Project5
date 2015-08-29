@@ -1,32 +1,74 @@
-Item Catalog Website Version 1.0
+Project 5 Setting up a Linux Server:
 
-GENERAL INFORMATION
--------------------
+Ip address: 52.25.22.130
 
-scripts included:
+host name: http://ec2-52-25-165-37.us-west-2.compute.amazonaws.com/
 
-project.py - Backend of website   
-database_setup.py - Sets up ORM for tables in database 
-lotsofitems.py - populates database
+user: grader
 
-Example run
------------
+password: grader
 
-First a database must be made and setup by the following commands:
+Point your browser to http://52.25.165.37/ to see the web app.
 
-User@Terminal:~/$python database_setup.py
-User@Terminal:~/$python lotsofitems.py
+Git checkout repo @ https://github.com/SyedAzizEnam/Project5
 
-To start the local server for the website do the following:
-User@Terminal:~/$python project.py
+put the contents in in /var/www/project/project
 
-Afterwards open a Web browser and follow the address:
+Software Requirements:
 
-localhost:5000/
+First be sure to run apt-get update and upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade 
 
+Install Apache
+$ sudo apt-get install python-pip apache2 libapache2-mod-wsgi
 
-CONTACT
-.......
+Install PostegreSQL
+$ sudo apt-get install postgresql postgresql-contrib
+$ sudo apt-get install libpq-dev
 
-E-mail: saenam@uci.edu
+Install python libraries
+$ sudo pip install flask
+$ sudo pip install sqlalchemy
+$ sudo pip install requests
+$ sudo pip install httplib2
+$ sudo pip install oauth2client
+$ sudo apt-get install python-psycopg2
+
+UTC time setup:
+
+$ sudo dpkg-reconfigure tzdata
+
+Select "None of the above" and then "UTC"
+
+UFW Setup:
+
+$ sudo ufw allow 2200/tcp
+$ sudo ufw allow 80/tcp
+$ sudo ufw allow 123/tcp
+$ sudo ufw enable
+
+PostgreSQL Setup:
+
+$ sudo su - postgres
+$ psql
+postgres=# CREATE USER catalog WITH PASSWORD 'password';
+postgres=# ALTER USER catalog CREATEDB;
+postgres=# CREATE DATABASE itemcatalog
+postgres=# \q
+$ exit
+
+Apache Setup:
+
+$ sudo cp ~/project/project.conf /etc/apache2/sites-available
+$ sudo a2enmod wsgi 
+$ sudo a2ensite project
+
+ORM Database setup:
+
+$ python databasesetup.py
+
+Then finally restart the server by
+
+$ sudo service apache2 restart
 
